@@ -6,7 +6,7 @@ from appium.webdriver.common.appiumby import AppiumBy
 # from test_daily_book import TestDailybook
 # from test_wajeezcast import TestWajeezcast
 
-import os
+# import os
 
 
 # from selenium.webdriver.support.wait import WebDriverWait
