@@ -26,41 +26,84 @@ from selenium.webdriver import Keys
 from time import sleep
 import unittest
 
+# from test_daily_book import TestDailybook
+# from test_wajeezcast import TestWajeezcast
+import re
+import unittest
+from time import sleep
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
-class TestSignUp(unittest.TestCase):
+from appium import webdriver
+from appium.webdriver.common.appiumby import AppiumBy
+from appium.webdriver.common.appiumby import AndroidBy
+
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.actions import interaction
+from selenium.webdriver.common.actions.action_builder import ActionBuilder
+from selenium.webdriver.common.actions.pointer_input import PointerInput
+
+import Login_Signup
+from Login_Signup import test_Login
+
+
+# import os
+
+
+# from selenium.webdriver.support.wait import WebDriverWait
+# from selenium.webdriver.support import expected_conditions as EC
+
+
+class TestLogin(unittest.TestCase):
     desired_cap = {
         "platformName": "Android",
         "appium:deviceName": "Pixel 6 Pro API 29",
         "appium:automationName": "UiAutomator2",
-        "appium:platformVersion": "11.0",
-        "appium:app": "C:\\Users\\salsa\\Downloads\\app-debug (4).apk",
-        "appium:appPackage": "com.faylasof.android.waamda"
-    }
-
+        "appium:platformVersion": "10.0",
+        "appium:app": "C:\\Users\\salsa\\Downloads\\app-debug (16).apk",
+        "appium:appPackage": "com.faylasof.android.waamda",
+        # "appium:noReset": True,
+        "appium:locale": "JO",
+        "appium:language": "en",
+        "appium:unicodeKeyboard": True,
+        "appium:resetKeyboard": True,
+        "appium:ensureWebviewsHavePages": True,
+        "appium:nativeWebScreenshot": True,
+        "appium:newCommandTimeout": 3600,
+        "appium:connectHardwareKeyboard": True}
 
     def setUp(self):
         self.driver = webdriver.Remote(
             'http://localhost:4723/wd/hub', self.desired_cap)
-        self.driver.implicitly_wait(10)
+        self.driver.implicitly_wait(30)
         self.driver.setSetting("driver", "compose")
 
     def test_sign_up_(self):
 
-        self.email_login = self.driver.find_element(by=AppiumBy.XPATH,
-                                                    value=
-                                                    "/hierarchy/android.widget.FrameLayout/android.widget"
-                                                    ".LinearLayout/android.widget.FrameLayout/android.widget"
-                                                    ".LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget"
-                                                    ".FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.widget"
-                                                    ".ScrollView/android.view.View[3]/android.widget.Button")
-        self.email_login.click()
-        self.driver.implicitly_wait(10)
+        Login_Signup.test_Login.TestLogin.test_EnterEmail(self)
+        self.enter_pass = self.driver.find_element(by=AppiumBy.CLASS_NAME, value="android.widget.EditText")
+        self.enter_pass.click()
+        self.enter_pass.clear()
+        sleep(2)
+        self.password = "salsabeel"
 
-        self.create_account = self.driver.find_element(by=AppiumBy.XPATH, value=
-        "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget"
-        ".LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget"
-        ".FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.widget"
-        ".ScrollView/android.view.View[5]/android.widget.TextView")
+        self.enter_pass.send_keys(self.password)
+        sleep(2)
+        valid_pass = re.compile(r"[A-Za-z0-9@#$%^.&+=]{8,}")
+        pass_result = re.match(valid_pass, self.password)
+        print(pass_result)
+        if pass_result:
+            print("match")
+        else:
+            print("not match")
+        sleep(2)
+        assert pass_result, "invalid pass"
+        self.show_pass = self.driver.find_element(by=AppiumBy.XPATH,
+                                                  value="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View/android.widget.ScrollView/android.view.View[1]/android.widget.EditText/android.view.View/android.widget.Button")
+        self.show_pass.click()
+
+        self.create_account = self.driver.find_element(by=AppiumBy.ID, value="register_button")
         self.create_account.click()
         sleep(2)
 
