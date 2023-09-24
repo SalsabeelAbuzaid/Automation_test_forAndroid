@@ -54,14 +54,7 @@ class TestLogin(unittest.TestCase):
         self.driver.setSetting("driver", "compose")
 
     def test_EnterEmail(self):
-        # try:
-        # self.new_account = self.driver.find_element(by=AppiumBy.XPATH, value=
-        #     "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget"
-        #     ".LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget"
-        #     ".FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.widget"
-        #     ".ScrollView/android.view.View[1]/android.widget.TextView").is_displayed()
-        #     assert False == self.new_account, "use another account"
-        #
+
         self.element_loginByEmail = self.driver.find_element(by=AppiumBy.XPATH,
                                                              value="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View/android.widget.ScrollView/android.view.View[3]")
 
@@ -72,10 +65,8 @@ class TestLogin(unittest.TestCase):
                                                     value="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View/android.widget.ScrollView/android.view.View[1]/android.widget.EditText")
         self.enter_email.click()
         self.enter_email.clear()
-        self.email = "cxdammjhs@wajeez.co"
+        self.email = "snajijknKdklkdlkhqk@testwajeez.co"
         self.enter_email.send_keys(self.email)
-        # self.entered_email = self.enter_email.get_attribute("text")
-        # assert self.entered_email == self.email, "Entered email does not match expected email"
 
         pat = re.compile(r"^\S+@\S+\.\S+$")
         self.result = re.match(pat, self.email)
@@ -86,38 +77,22 @@ class TestLogin(unittest.TestCase):
         assert self.result, "invalid email"
         print(self.email)
         sleep(2)
+        # in case the user used the wrong format
+        try:
+            if self.driver.find_element(by=AppiumBy.XPATH,
+                                        value="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View/android.widget.ScrollView/android.view.View[1]/android.widget.TextView").is_displayed():
+                raise AssertionError("plz use a correct email format")
+        except NoSuchElementException:
+            pass
+        except AssertionError as E:
+            raise E
+        sleep(2)
+        self.start_now = self.driver.find_element(by=AppiumBy.XPATH,
+                                                  value="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.Button")
 
         self.continueButton = self.driver.find_element(by=AppiumBy.CLASS_NAME, value="android.widget.Button")
         self.continueButton.click()
         sleep(2)
-
-        # self.Login = self.driver.find_element(by=AppiumBy.XPATH,
-        #                                       value="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View/android.widget.ScrollView/android.view.View[4]/android.widget.Button")
-        # if not self.Login.is_displayed():
-        #     raise AssertionError("Email is new. Test failed.")
-        # else:
-        #     print("email is not new")
-        #     test_sign_up.TestSignUp.test_sign_up_Email(self)
-
-        # except NoSuchElementException:
-        #     raise AssertionError("Element not found. Test failed.")
-        # backend_url = "https://api.wajeez.group/api/identity/v1/Account/authenticate"
-        # response = requests.post(backend_url, json={"email": self.email})
-        #
-        # if response == 200:
-        #     data = response.json()
-        #     if data.get("exists"):
-        #         login_screen = WebDriverWait(self.driver, 10).until(
-        #             EC.presence_of_element_located((AppiumBy.XPATH, "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View/android.widget.ScrollView/android.view.View[4]/android.widget.Button"))
-        #         )
-        #         print(f"Email '{self.email}' already exists. Navigating to login screen.")
-        #     else:
-        #         registration_screen = WebDriverWait(self.driver, 10).until(
-        #             EC.presence_of_element_located((AppiumBy.CLASS_NAME, "android.widget.Button"))
-        #         )
-        #         print(f"Email '{self.email}' doesn't exist. Navigating to registration screen.")
-        # else:
-        #     print("Error occurred while checking email existence.")
 
     def test_login(self):
 
@@ -159,10 +134,10 @@ class TestLogin(unittest.TestCase):
         self.Login.click()
         sleep(10)
 
-        assertHomeScreen = self.driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="الرئيسية")
+        self.assertHomeScreen = self.driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value="الرئيسية")
 
-        if assertHomeScreen is not None:
-            if assertHomeScreen.is_displayed():
+        if self.assertHomeScreen is not None:
+            if self.assertHomeScreen.is_displayed():
                 # The element exists on the screen and is visible.
                 print("The element exists on the screen and is visible.")
             else:
