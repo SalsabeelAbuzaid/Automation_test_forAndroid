@@ -6,7 +6,7 @@ from appium.webdriver.common.touch_action import TouchAction
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
-import HomeScreen.test_daily_book
+import HomeScreen.test_daily_content
 
 
 class TestListChapter(HomeScreen.test_daily_book.TestDailybook):

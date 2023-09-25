@@ -6,16 +6,16 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from appium.webdriver.connectiontype import ConnectionType
-import HomeScreen.test_daily_book
+import HomeScreen.test_daily_content
 # import HomeScreen.test_daily_book
 
 
 class TestDownloadBooks(HomeScreen.test_daily_book.TestDailybook):
 
     def test_download(self):
-        # self.daily_book = self.driver.find_element(by=AppiumBy.XPATH,
+        # self.Listen_daily_book = self.driver.find_element(by=AppiumBy.XPATH,
         #                                            value="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/android.widget.FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.widget.ScrollView/android.view.View[1]")
-        # self.daily_book.click()
+        # self.Listen_daily_book.click()
 
         HomeScreen.test_daily_book.TestDailybook.test_clickOnTheDailyBook(self)
 

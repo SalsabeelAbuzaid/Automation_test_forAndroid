@@ -2,7 +2,7 @@ import unittest
 from time import sleep
 from appium.webdriver.common.appiumby import AppiumBy
 from appium.webdriver.common.touch_action import TouchAction
-import HomeScreen.test_daily_book
+import HomeScreen.test_daily_content
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By

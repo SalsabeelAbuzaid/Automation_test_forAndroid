@@ -4,7 +4,7 @@ from time import sleep
 from appium.webdriver.common.appiumby import AppiumBy
 from appium.webdriver.common.touch_action import TouchAction
 
-import HomeScreen.test_daily_book
+import HomeScreen.test_daily_content
 
 
 class TestNovels(HomeScreen.test_daily_book.TestDailybook):
