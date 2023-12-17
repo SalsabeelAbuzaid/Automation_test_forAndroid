@@ -27,8 +27,9 @@ class TestLogin(unittest.TestCase):
         self.enter_email.click()
         self.enter_email.clear()
 
+    #
         # Validate the email format
-        self.email = "sljhhfdfgji@testwajeez.co"
+        self.email = "salsa+123@wajeez.test"
         self.enter_email.send_keys(self.email)
         pat = re.compile(r"^\S+@\S+\.\S+$")
         self.result = re.match(pat, self.email)
@@ -80,10 +81,17 @@ class TestLogin(unittest.TestCase):
             print("not match")
         sleep(2)
         assert pass_result, "invalid pass"
+        # self.register_screen = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR,
+        #                                            value='new UiSelector().resourceId("register_button")').is_displayed()
 
-        self.show_pass = self.driver.find_element(by=AppiumBy.XPATH,
-                                                  value="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View/android.widget.ScrollView/android.view.View[2]/android.widget.EditText/android.view.View/android.widget.Button")
-        self.show_pass.click()
+        # if not self.register_screen:
+        #     pass
+        # else:
+        #     test_sign_up.TestSignUp.test_sign_up_Email(self)
+
+        # self.show_pass = self.driver.find_element(by=AppiumBy.XPATH,
+        #                                           value="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View/android.widget.ScrollView/android.view.View[2]/android.widget.EditText/android.view.View/android.widget.Button")
+        # self.show_pass.click()
 
         #  login
         self.Login = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR,

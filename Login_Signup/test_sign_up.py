@@ -11,6 +11,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 import Login_Signup
 from Login_Signup import test_Login
+# from Login_Signup import commen_function
 import random
 
 
@@ -20,11 +21,10 @@ class TestSignUp(Login_Signup.test_Login.TestLogin):
         #  this function to enter the email as a first step
         Login_Signup.test_Login.TestLogin.test_EnterEmail(self)
         try:
-            self.register_screen = self.driver.find_element(by=AppiumBy.XPATH,
-
-                                                            value="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View/android.widget.ScrollView/android.view.View[2]/android.widget.TextView").is_displayed()
-            if not self.register_screen:
-                assert False == self.register_screen, "it's a new account"
+            self.register_button = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR,
+                                                            value='new UiSelector().resourceId("register_button")').is_displayed()
+            if not self.register_button:
+                assert False == self.register_button, "it's a new account"
 
         except NoSuchElementException:
             raise AssertionError("Element not found. Test failed.")
@@ -43,6 +43,7 @@ class TestSignUp(Login_Signup.test_Login.TestLogin):
         print(pass_result)
         if pass_result:
             print("match")
+            print(self.enter_pass)
         else:
             print("not match")
         sleep(2)
