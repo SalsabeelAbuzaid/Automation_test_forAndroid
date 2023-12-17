@@ -14,37 +14,10 @@ from Login_Signup import test_Login
 import random
 
 
-class TestSignUp(unittest.TestCase):
-    desired_cap = {
-        "platformName": "Android",
-        "appium:deviceName": "Pixel 6 Pro API 29",
-        "appium:automationName": "UiAutomator2",
-        "appium:platformVersion": "10.0",
-        "appium:app": "C:\\Users\\salsa\\Downloads\\app-debug (16).apk",
-        "appium:appPackage": "com.faylasof.android.waamda",
-        # "appium:noReset": True,
-        "appium:locale": "JO",
-        "appium:language": "en",
-        "appium:unicodeKeyboard": True,
-        "appium:resetKeyboard": True,
-        "appium:ensureWebviewsHavePages": True,
-        "appium:nativeWebScreenshot": True,
-        "appium:newCommandTimeout": 3600,
-        "appium:connectHardwareKeyboard": True}
-
-    def setUp(self):
-        self.driver = webdriver.Remote(
-            'http://localhost:4723/wd/hub', self.desired_cap)
-        self.driver.implicitly_wait(30)
-        self.driver.setSetting("driver", "compose")
-
-    # def scroll_down(self):
-    #     self.driver.swipe(start_x=500, start_y=1000, end_x=500, end_y=800, duration=500)
-    #     sleep(2)
-    #     pass
-
+# Create a test class that inherits from unittest.TestCase
+class TestSignUp(Login_Signup.test_Login.TestLogin):
     def test_sign_up_Email(self):
-
+        #  this function to enter the email as a first step
         Login_Signup.test_Login.TestLogin.test_EnterEmail(self)
         try:
             self.register_screen = self.driver.find_element(by=AppiumBy.XPATH,
@@ -87,7 +60,7 @@ class TestSignUp(unittest.TestCase):
                                                        value='new UiSelector().resourceId("register_button")')
         self.create_account.click()
         sleep(5)
-        # gather the category in a 2 list and shuffle them then choose randomly 5 from them
+        # Gather and shuffle category elements and select a random number of them
         self.categories = [
             {
                 "xpath": "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View/android.widget.ScrollView/android.view.View[1]/android.widget.TextView"},
@@ -138,6 +111,7 @@ class TestSignUp(unittest.TestCase):
             self.category_element = self.driver.find_element(by=AppiumBy.XPATH, value=xpath)
             self.category_element.click()
 
+        #  scroll the whole screen up
         screen_size = self.driver.get_window_size()
         screen_height = screen_size['height']
         self.driver.swipe(start_x=screen_size['width'] // 2, start_y=screen_height - 1,
@@ -148,6 +122,7 @@ class TestSignUp(unittest.TestCase):
             self.category_element2 = self.driver.find_element(by=AppiumBy.XPATH, value=xpath2)
             self.category_element2.click()
 
+        #  check if thr user tried to choose more than five
         try:
             if self.driver.find_element(by=AppiumBy.XPATH,
                                         value="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/androidx.cardview.widget.CardView/android.view.ViewGroup/android.widget.TextView").is_displayed():
@@ -157,9 +132,10 @@ class TestSignUp(unittest.TestCase):
         except AssertionError as E:
             raise E
         sleep(2)
+
+        # proceed with the sighup process if the user choose a category, if it's not the test will stop
         self.start_now = self.driver.find_element(by=AppiumBy.XPATH,
                                                   value="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.Button")
-
         try:
             if self.start_now.is_displayed() and self.start_now.is_enabled():
                 self.start_now.click()
@@ -171,8 +147,9 @@ class TestSignUp(unittest.TestCase):
         except AssertionError as E:
             raise E
 
-        self.assertHomeScreen = self.driver.find_element(by=AppiumBy.XPATH,
-                                                         value="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/android.widget.FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View/android.view.View[4]/android.widget.TextView")
+        #  assert the home screen
+        self.assertHomeScreen = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR,
+                                                         value='new UiSelector().resourceId("com.faylasof.android.waamda:id/navigation_graph_home_filtered")')
 
         if self.assertHomeScreen is not None:
             if self.assertHomeScreen.is_displayed():

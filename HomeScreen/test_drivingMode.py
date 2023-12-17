@@ -17,7 +17,6 @@ import HomeScreen.test_daily_content
 
 class TestDRivingModee(HomeScreen.test_daily_book.TestDailybook):
 
-
     def test_drivingMode(self):
         HomeScreen.test_daily_book.TestDailybook.test_clickOnTheDailyBook(self)
         sleep(5)
@@ -102,13 +101,13 @@ class TestDRivingModee(HomeScreen.test_daily_book.TestDailybook):
         self.backTo_ThePLayer.click()
         sleep(2)
         self.player_screen = self.driver.find_element(by=AppiumBy.XPATH,
-                                                            value=
-                                                            "/hierarchy/android.widget.FrameLayout/android.widget"
-                                                            ".LinearLayout/android.widget.FrameLayout/android.widget"
-                                                            ".LinearLayout/android.widget.FrameLayout/android.view"
-                                                            ".ViewGroup/android.widget.FrameLayout/android.widget"
-                                                            ".FrameLayout/androidx.compose.ui.platform.ComposeView"
-                                                            "/android.view.View/android.widget.TextView[4]")
+                                                      value=
+                                                      "/hierarchy/android.widget.FrameLayout/android.widget"
+                                                      ".LinearLayout/android.widget.FrameLayout/android.widget"
+                                                      ".LinearLayout/android.widget.FrameLayout/android.view"
+                                                      ".ViewGroup/android.widget.FrameLayout/android.widget"
+                                                      ".FrameLayout/androidx.compose.ui.platform.ComposeView"
+                                                      "/android.view.View/android.widget.TextView[4]")
         assert self.player_screen, "it's not the the main player screen"
         sleep(5)
 

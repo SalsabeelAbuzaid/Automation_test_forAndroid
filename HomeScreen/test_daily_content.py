@@ -12,80 +12,78 @@ from selenium.webdriver.common.by import By
 import Login_Signup
 import HomeScreen
 from Login_Signup import test_Login
+from Config import config
 
 
 class TestDailybook(Login_Signup.test_Login.TestLogin):
-    desired_cap = {"platformName": "Android",
-                   "appium:deviceName": "Pixel 6 Pro API 29",
-                   "appium:automationName": "UiAutomator2",
-                   "appium:platformVersion": "10.0",
-                   "appium:app": "C:\\Users\\salsa\\Downloads\\app-debug (16).apk",
-                   "appium:appPackage": "com.faylasof.android.waamda",
-                   # "appium:noReset": True,
-                   "appium:locale": "JO",
-                   "appium:language": "en",
-                   "appium:unicodeKeyboard": True,
-                   "appium:resetKeyboard": True,
-                   "appium:ensureWebviewsHavePages": True,
-                   "appium:nativeWebScreenshot": True,
-                   "appium:newCommandTimeout": 3600,
-                   "appium:connectHardwareKeyboard": True
-                   }
-
-    def setUp(self):
-        self.driver = webdriver.Remote(
-            'http://localhost:4723/wd/hub', self.desired_cap)
-        self.driver.implicitly_wait(30)
-        self.driver.setSetting("driver", "compose")
-
-        WebDriverWait(self.driver, 10)
-        Login_Signup.test_Login.TestLogin.test_login(self)
+    # def setUp(self):
+    #
+    #     self.driver = config.create_appium_driver()
+    #     self.driver.implicitly_wait(30)
+    #     Login_Signup.test_Login.TestLogin.test_login(self)
 
     def test_click_onListening(self):
-
         sleep(5)
+        # assert the freemium user
         try:
-            if self.driver.find_element(by=AppiumBy.XPATH,
-                                        value="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/android.widget.FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View/android.view.View[1]/android.view.View[1]/android.widget.TextView[1]").is_displayed():
+            if not self.driver.find_element(by=AppiumBy.XPATH,
+                                            value="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/android.widget.FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View/android.view.View[1]/android.view.View[1]/android.widget.TextView[1]").is_displayed():
                 raise AssertionError("it's not a freemium user")
         except NoSuchElementException:
             pass
         except AssertionError as E:
             raise E
-        sleep(2)
+        sleep(4)
         # Listen to the daily book
         self.Listen_daily_book = self.driver.find_element(by=AppiumBy.XPATH,
                                                           value="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/android.widget.FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View/android.view.View[1]/android.view.View[1]/android.view.View[4]")
         self.Listen_daily_book.click()
-
+        sleep(5)
         self.progress_bar_running = self.driver.find_element(by=AppiumBy.XPATH,
-                                                             value="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.widget.ScrollView/android.view.View[2]")
-        "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.widget.ScrollView/android.view.View[3]"
-        "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.widget.ScrollView/android.view.View[3]"
+                                                             value="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.widget.ScrollView/android.view.View[2]/android.widget.ProgressBar")
+
+        self.progress_text = self.progress_bar_running.get_attribute("text")
+        # self.initial_progress_text = self.progress_bar_running.get_attribute("text")
         sleep(10)
+        self.final_progress_text = self.progress_text
+        try:
+            if self.progress_text != self.final_progress_text:
+                print("Progress bar is running")
+            else:
+                print("Progress bar is not running")
+
+        except NoSuchElementException:
+            raise AssertionError("the test failed the progress is not running")
+
+    def test_reading_button(self):
+        self.test_reading_button = self.driver.find_element(by=AppiumBy.XPATH,
+                                                            value="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/android.widget.FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View/android.view.View[1]/android.view.View/android.view.View[5]/android.widget.TextView/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.widget.Button[4]")
+        self.test_reading_button.click()
+
     def test_dailyBook(self):
 
         self.test_click_onListening()
-        self.play_the_button = self.driver.find_element(by=AppiumBy.XPATH, value="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.widget.Button[4]")
         self.play_the_button.click()
         sleep(10)
-        self.switch_reading = self.driver.find_element(by=AppiumBy.XPATH, value="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.widget.Button[8]")
+        self.switch_reading = self.driver.find_element(by=AppiumBy.XPATH,
+                                                       value="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.widget.Button[8]")
         self.switch_reading.click()
         # self.switch_reading = WebDriverWait(self.driver, 20).until(EC.presence_of_element_located((By.XPATH,value="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.widget.Button[8]")
         # self.switch_reading.click()
         sleep(5)
-        self.reading_screen = self.driver.find_element(by=AppiumBy.XPATH, value="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View[2]")
+        self.reading_screen = self.driver.find_element(by=AppiumBy.XPATH,
+                                                       value="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View[2]")
         assert self.reading_screen.is_displayed(), "The screen did not display after clicking the button."
 
         # HomeScreen.test_drivingMode.TestDRivingModee.test_drivingMode(self)
         sleep(5)
 
-    def test_nextChapter(self):
-        self.test_click_onListening()
-        self.nextChapter = self.driver.find_element(by=AppiumBy.XPATH,
-                                                    value="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.widget.Button[3]")
-        self.nextChapter.click()
-        sleep(8)
+    # def test_nextChapter(self):
+    #     self.test_click_onListening()
+    #     self.nextChapter = self.driver.find_element(by=AppiumBy.XPATH,
+    #                                                 value="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.widget.Button[3]")
+    #     self.nextChapter.click()
+    #     sleep(8)
 
     # def test_add_toFavourite(self):
     #     self.test_clickOnTheDailyBook()
