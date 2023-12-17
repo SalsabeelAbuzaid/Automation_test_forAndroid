@@ -8,7 +8,7 @@ desired_cap = {
     "appium:deviceName": "Pixel 6 Pro API 29",
     "appium:automationName": "UiAutomator2",
     "appium:platformVersion": "10.0",
-    "appium:app": "C:\\Users\\salsa\\Downloads\\app-debug 1.apk",
+    "appium:app": "C:\\Users\\salsa\\Downloads\\app-release 15.apk",
     "appium:appPackage": "com.faylasof.android.waamda",
     "appium:noReset": True,
     "appium:locale": "JO",

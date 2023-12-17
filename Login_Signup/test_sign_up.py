@@ -51,11 +51,11 @@ class TestSignUp(Login_Signup.test_Login.TestLogin):
 
         wait = WebDriverWait(self.driver, 5)
 
-        self.show_pass = wait.until(
-            EC.presence_of_element_located((By.XPATH,
-                                            "hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View/android.widget.ScrollView/android.view.View[1]/android.widget.EditText/android.view.View/android.widget.Button")))
-
-        self.show_pass.click()
+        # self.show_pass = wait.until(
+        #     EC.presence_of_element_located((By.XPATH,
+        #                                     "hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View/android.widget.ScrollView/android.view.View[1]/android.widget.EditText/android.view.View/android.widget.Button")))
+        #
+        # self.show_pass.click()
 
         self.create_account = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR,
                                                        value='new UiSelector().resourceId("register_button")')

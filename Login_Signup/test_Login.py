@@ -8,6 +8,7 @@ from appium.webdriver.common.appiumby import AppiumBy
 from selenium.common.exceptions import NoSuchElementException
 import sys
 from Config import config
+# import commen_function
 
 class TestLogin(unittest.TestCase):
     def setUp(self):
@@ -38,7 +39,7 @@ class TestLogin(unittest.TestCase):
         else:
             print("not valid")
         assert self.result, "invalid email"
-        print(self.email)
+        print(self.result)
         sleep(2)
 
         # Check for an error message
@@ -81,13 +82,14 @@ class TestLogin(unittest.TestCase):
             print("not match")
         sleep(2)
         assert pass_result, "invalid pass"
+        # Trying to navigate the user to the sign up function when it's a new email
         # self.register_screen = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR,
         #                                            value='new UiSelector().resourceId("register_button")').is_displayed()
-
+        #
         # if not self.register_screen:
         #     pass
         # else:
-        #     test_sign_up.TestSignUp.test_sign_up_Email(self)
+        #     commen_function.TestCommenFuntion.Signp_function()
 
         # self.show_pass = self.driver.find_element(by=AppiumBy.XPATH,
         #                                           value="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View/android.widget.ScrollView/android.view.View[2]/android.widget.EditText/android.view.View/android.widget.Button")
@@ -100,7 +102,7 @@ class TestLogin(unittest.TestCase):
         sleep(10)
 
         self.assertHomeScreen = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR,
-                                                         value='new UiSelector().resourceId("com.faylasof.android.waamda:id/navigation_graph_home_filtered")')
+                                                         value='new UiSelector().resourceId("ReadingButton")')
 
         if self.assertHomeScreen is not None:
             if self.assertHomeScreen.is_displayed():

@@ -25,18 +25,18 @@ class TestDailybook(Login_Signup.test_Login.TestLogin):
     def test_click_onListening(self):
         sleep(5)
         # assert the freemium user
-        try:
-            if not self.driver.find_element(by=AppiumBy.XPATH,
-                                            value="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/android.widget.FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View/android.view.View[1]/android.view.View[1]/android.widget.TextView[1]").is_displayed():
-                raise AssertionError("it's not a freemium user")
-        except NoSuchElementException:
-            pass
-        except AssertionError as E:
-            raise E
-        sleep(4)
+        # try:
+        #     if not self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR,
+        #                                                      value='new UiSelector().resourceId("ListeningButton")').is_displayed():
+        #         raise AssertionError("it's not a freemium user")
+        # except NoSuchElementException:
+        #     pass
+        # except AssertionError as E:
+        #     raise E
+        # sleep(4)
         # Listen to the daily book
-        self.Listen_daily_book = self.driver.find_element(by=AppiumBy.XPATH,
-                                                          value="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/android.widget.FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View/android.view.View[1]/android.view.View[1]/android.view.View[4]")
+        self.Listen_daily_book = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR,
+                                                          value='new UiSelector().resourceId("ListeningButton")')
         self.Listen_daily_book.click()
         sleep(5)
         self.progress_bar_running = self.driver.find_element(by=AppiumBy.XPATH,
