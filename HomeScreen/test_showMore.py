@@ -7,7 +7,7 @@ from appium.webdriver.common.touch_action import TouchAction
 import HomeScreen.test_daily_content
 
 
-class TestNovels(HomeScreen.test_daily_book.TestDailybook):
+class TestNovels(HomeScreen.test_daily_content.TestDailybook):
 
     def test_Show_more(self):
         sleep(5)

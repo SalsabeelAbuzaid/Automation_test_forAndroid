@@ -10,9 +10,9 @@ import HomeScreen.test_daily_content
 
 
 
-class TestDownloadBooks(HomeScreen.test_daily_book.TestDailybook):
+class TestDownloadBooks(HomeScreen.test_daily_content.TestDailybook):
     def test_add_toFavourite(self):
-        HomeScreen.test_daily_book.TestDailybook.test_clickOnTheDailyBook(self)
+        HomeScreen.test_daily_content.TestDailybook.test_clickOnTheDailyBook(self)
         self.ThreeDotOption = self.driver.find_element(by=AppiumBy.XPATH,
                                                        value="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.widget.Button[1]")
         self.ThreeDotOption.click()

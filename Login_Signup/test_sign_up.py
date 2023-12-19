@@ -19,7 +19,7 @@ import random
 class TestSignUp(Login_Signup.test_Login.TestLogin):
     def test_sign_up_Email(self):
         #  this function to enter the email as a first step
-        Login_Signup.test_Login.TestLogin.test_EnterEmail(self)
+        Login_Signup.test_Login.TestLogin.login_screen(self)
         try:
             self.register_button = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR,
                                                             value='new UiSelector().resourceId("register_button")').is_displayed()

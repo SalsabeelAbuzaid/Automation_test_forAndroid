@@ -8,7 +8,7 @@ import HomeScreen.test_daily_content
 
 
 
-class TestListChapter(HomeScreen.test_daily_book.TestDailybook):
+class TestListChapter(HomeScreen.test_daily_content.TestDailybook):
 
     def test_chapter_list(self):
 

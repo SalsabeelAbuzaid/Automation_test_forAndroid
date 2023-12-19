@@ -10,7 +10,7 @@ import HomeScreen.test_daily_content
 # import HomeScreen.test_daily_book
 
 
-class TestDownloadBooks(HomeScreen.test_daily_book.TestDailybook):
+class TestDownloadBooks(HomeScreen.test_daily_content.TestDailybook):
 
     def test_download(self):
         # self.Listen_daily_book = self.driver.find_element(by=AppiumBy.XPATH,

@@ -1,26 +1,15 @@
-from time import sleep
 import unittest
-from selenium.common.exceptions import NoSuchElementException
-from appium import webdriver
-import vlc
+from time import sleep
+
 from appium.webdriver.common.appiumby import AppiumBy
+from selenium.common.exceptions import NoSuchElementException
+
 # import HomeScreen.test_drivingMode
-from selenium.webdriver.support.expected_conditions import visibility_of_element_located
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.by import By
 import Login_Signup
-import HomeScreen
 from Login_Signup import test_Login
-from Config import config
 
 
 class TestDailybook(Login_Signup.test_Login.TestLogin):
-    # def setUp(self):
-    #
-    #     self.driver = config.create_appium_driver()
-    #     self.driver.implicitly_wait(30)
-    #     Login_Signup.test_Login.TestLogin.test_login(self)
 
     def test_click_onListening(self):
         sleep(5)
@@ -34,6 +23,8 @@ class TestDailybook(Login_Signup.test_Login.TestLogin):
         # except AssertionError as E:
         #     raise E
         # sleep(4)
+
+        
         # Listen to the daily book
         self.Listen_daily_book = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR,
                                                           value='new UiSelector().resourceId("ListeningButton")')
@@ -63,7 +54,7 @@ class TestDailybook(Login_Signup.test_Login.TestLogin):
     def test_dailyBook(self):
 
         self.test_click_onListening()
-        self.play_the_button.click()
+        # self.play_the_button.click()
         sleep(10)
         self.switch_reading = self.driver.find_element(by=AppiumBy.XPATH,
                                                        value="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.widget.Button[8]")

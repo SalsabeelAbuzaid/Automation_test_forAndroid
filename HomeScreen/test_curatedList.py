@@ -8,7 +8,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 
 
-class TestCuratedList(HomeScreen.test_daily_book.TestDailybook):
+class TestCuratedList(HomeScreen.test_daily_content.TestDailybook):
 
     def test_curatedList(self):
         sleep(5)

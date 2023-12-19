@@ -15,7 +15,7 @@ import HomeScreen.test_daily_content
 
 # import test_login_email
 
-class TestDRivingModee(HomeScreen.test_daily_book.TestDailybook):
+class TestDRivingModee(HomeScreen.test_daily_content.TestDailybook):
 
     def test_drivingMode(self):
         HomeScreen.test_daily_book.TestDailybook.test_clickOnTheDailyBook(self)

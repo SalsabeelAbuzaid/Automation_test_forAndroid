@@ -16,8 +16,8 @@ class TestLogin(unittest.TestCase):
         self.driver.implicitly_wait(30)
         # self.driver.setSetting("driver", "compose")
 
-    def test_EnterEmail(self):
-
+    def login_screen(self):
+        # verify that user can login with valid email
         self.element_loginByEmail = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR,
                                                              value='new UiSelector().resourceId("email_login_button")')
         self.element_loginByEmail.click()
@@ -28,7 +28,7 @@ class TestLogin(unittest.TestCase):
         self.enter_email.click()
         self.enter_email.clear()
 
-    #
+
         # Validate the email format
         self.email = "salsa+123@wajeez.test"
         self.enter_email.send_keys(self.email)
@@ -56,12 +56,12 @@ class TestLogin(unittest.TestCase):
         self.continueButton = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR,
                                                        value='new UiSelector().resourceId("continue_button")')
         self.continueButton.click()
-        sleep(5)
+        sleep(3)
 
-    def test_login(self):
+    def test_enter_the_password(self):
 
-        # Call the test_EnterEmail as it's the first step
-        TestLogin.test_EnterEmail(self)
+        # Call the test login screen as it's the first step
+        TestLogin.login_screen(self)
 
         self.enter_pass = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR,
                                                    value='new UiSelector().resourceId("password_text_field")')
@@ -82,14 +82,21 @@ class TestLogin(unittest.TestCase):
             print("not match")
         sleep(2)
         assert pass_result, "invalid pass"
-        # Trying to navigate the user to the sign up function when it's a new email
-        # self.register_screen = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR,
-        #                                            value='new UiSelector().resourceId("register_button")').is_displayed()
-        #
-        # if not self.register_screen:
-        #     pass
-        # else:
-        #     commen_function.TestCommenFuntion.Signp_function()
+
+        # When the register button appeared the test will fail as it a new email
+        try:
+            self.register_screen = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR,
+                                                   value='new UiSelector().resourceId("register_button")')
+
+            is_register_button_present = True
+        except NoSuchElementException:
+            is_register_button_present = False
+
+        if is_register_button_present:
+            if self.register_screen.is_displayed():
+                print("This is a new email")
+                self.fail("Stopping the test because the registration button appeared")
+
 
         # self.show_pass = self.driver.find_element(by=AppiumBy.XPATH,
         #                                           value="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View/android.widget.ScrollView/android.view.View[2]/android.widget.EditText/android.view.View/android.widget.Button")
@@ -99,7 +106,7 @@ class TestLogin(unittest.TestCase):
         self.Login = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR,
                                               value='new UiSelector().resourceId("login_button")')
         self.Login.click()
-        sleep(10)
+        sleep(6)
 
         self.assertHomeScreen = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR,
                                                          value='new UiSelector().resourceId("ReadingButton")')
@@ -117,3 +124,9 @@ class TestLogin(unittest.TestCase):
 
     if __name__ == '__main__':
         unittest.main()
+
+
+
+
+
+

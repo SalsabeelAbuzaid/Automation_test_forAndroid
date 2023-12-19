@@ -9,7 +9,7 @@ from selenium.webdriver.common.by import By
 import HomeScreen.test_daily_content
 
 
-class TestListChapter(HomeScreen.test_daily_book.TestDailybook):
+class TestListChapter(HomeScreen.test_daily_content.TestDailybook):
     def test_choose_book(self):
         self.pick_book = self.driver.find_element(by=AppiumBy.XPATH,
                                                   value="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/android.widget.FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View[3]/android.view.View[2]/android.view.View[3]")
