@@ -9,17 +9,22 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
-import Login_Signup
 from Login_Signup import test_Login
 # from Login_Signup import commen_function
 import random
+from Config import config
 
 
 # Create a test class that inherits from unittest.TestCase
-class TestSignUp(Login_Signup.test_Login.TestLogin):
+
+class TestSignUp(unittest.TestCase):
+    def setUp(self):
+        self.driver = config.create_appium_driver()
+        self.driver.implicitly_wait(30)
+
     def test_sign_up_Email(self):
         #  this function to enter the email as a first step
-        Login_Signup.test_Login.TestLogin.login_screen(self)
+        test_Login.TestLogin.enter_Email(self)
         try:
             self.register_button = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR,
                                                             value='new UiSelector().resourceId("register_button")').is_displayed()

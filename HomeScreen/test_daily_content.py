@@ -8,10 +8,21 @@ from selenium.common.exceptions import NoSuchElementException
 import Login_Signup
 from Login_Signup import test_Login
 
+from Config import config
+from selenium.common.exceptions import NoSuchElementException
 
-class TestDailybook(Login_Signup.test_Login.TestLogin):
+
+class TestDailybook(unittest.TestCase):
+
+    def setUp(self):
+        self.driver = config.create_appium_driver()
+        self.driver.implicitly_wait(30)
 
     def test_click_onListening(self):
+        try:
+            Login_Signup.test_Login.TestLogin.test_Login_BYEmail(self)
+        except NoSuchElementException:
+            pass
         sleep(5)
         # assert the freemium user
         # try:

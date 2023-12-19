@@ -6,11 +6,23 @@ import HomeScreen.test_daily_content
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
+import Login_Signup.test_Login
+
+from Config import config
+from selenium.common.exceptions import NoSuchElementException
 
 
-class TestCuratedList(HomeScreen.test_daily_content.TestDailybook):
+class TestCuratedList(unittest.TestCase):
+    def setUp(self):
+        self.driver = config.create_appium_driver()
+        self.driver.implicitly_wait(30)
 
     def test_curatedList(self):
+        try:
+            Login_Signup.test_Login.TestLogin.test_Login_BYEmail(self)
+        except NoSuchElementException:
+            pass
+
         sleep(5)
         action = TouchAction(self.driver)
         for i in range(3):

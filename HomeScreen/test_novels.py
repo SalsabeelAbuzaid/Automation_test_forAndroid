@@ -10,12 +10,22 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 
-
+from selenium.common.exceptions import NoSuchElementException
 import HomeScreen.test_daily_content
+from Config import config
+import Login_Signup.test_Login
 
-class TestNovels(HomeScreen.test_daily_book.TestDailybook):
+
+class TestNovels(unittest.TestCase):
+    def setUp(self):
+        self.driver = config.create_appium_driver()
+        self.driver.implicitly_wait(30)
 
     def test_novelsss(self):
+        try:
+            Login_Signup.test_Login.TestLogin.test_Login_BYEmail(self)
+        except NoSuchElementException:
+            pass
         sleep(5)
         action = TouchAction(self.driver)
 

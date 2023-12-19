@@ -12,14 +12,26 @@ from selenium.webdriver.common.by import By
 
 import HomeScreen.test_daily_content
 
+from selenium.common.exceptions import NoSuchElementException
+import Login_Signup.test_Login
+from Config import config
 
-# import test_login_email
 
-class TestDRivingModee(HomeScreen.test_daily_content.TestDailybook):
+class TestDRivingModee(unittest.TestCase):
+
+    def setUp(self):
+        self.driver = config.create_appium_driver()
+        self.driver.implicitly_wait(30)
 
     def test_drivingMode(self):
-        HomeScreen.test_daily_book.TestDailybook.test_clickOnTheDailyBook(self)
+        try:
+            Login_Signup.test_Login.TestLogin.test_Login_BYEmail(self)
+        except NoSuchElementException:
+            pass
+
+        HomeScreen.test_daily_content.TestDailybook.test_click_onListening(self)
         sleep(5)
+
         self.driving_mode = self.driver.find_element(by=AppiumBy.XPATH,
                                                      value=
                                                      "/hierarchy/android.widget.FrameLayout/android.widget"

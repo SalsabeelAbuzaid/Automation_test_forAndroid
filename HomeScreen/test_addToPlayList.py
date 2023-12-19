@@ -1,4 +1,5 @@
 import unittest
+from selenium.common.exceptions import NoSuchElementException
 from time import sleep
 from appium.webdriver.common.appiumby import AppiumBy
 from appium.webdriver.common.touch_action import TouchAction
@@ -9,19 +10,29 @@ from appium.webdriver.connectiontype import ConnectionType
 import HomeScreen.test_daily_content
 from selenium.common.exceptions import NoSuchElementException
 
+import Login_Signup.test_Login
+from Config import config
 
 
-class TestDownloadBooks(HomeScreen.test_daily_content.TestDailybook):
+class TestAddToPlayList(unittest.TestCase):
+    def setUp(self):
+        self.driver = config.create_appium_driver()
+        self.driver.implicitly_wait(30)
+
     def test_AddDailyBookToPlayList(self):
-        HomeScreen.test_daily_content.TestDailybook.test_clickOnTheDailyBook(self)
+        try:
+            Login_Signup.test_Login.TestLogin.test_Login_BYEmail(self)
+        except NoSuchElementException:
+            pass
+
         self.addToPlayList = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR,
-                                                             value='new UiSelector().resourceId("FeaturedContentAddToPlaylistButton")')
+                                                      value='new UiSelector().resourceId("FeaturedContentAddToPlaylistButton")')
         self.addToPlayList.click()
-        sleep(2)
+        sleep(6)
 
         try:
             self.subscription_screen = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR,
-                                                          value='new UiSelector().resourceId("com.faylasof.android.waamda:id/coordinator")')
+                                                                value='new UiSelector().resourceId("com.faylasof.android.waamda:id/coordinator")')
             self.addToPlayList.click()
 
         except NoSuchElementException:

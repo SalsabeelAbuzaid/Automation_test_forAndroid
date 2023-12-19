@@ -10,7 +10,7 @@ desired_cap = {
     "appium:platformVersion": "10.0",
     "appium:app": "C:\\Users\\salsa\\Downloads\\app-release 15.apk",
     "appium:appPackage": "com.faylasof.android.waamda",
-    "appium:noReset": False,
+    "appium:noReset": True,
     "appium:locale": "JO",
     "appium:language": "en",
     "appium:unicodeKeyboard": True,

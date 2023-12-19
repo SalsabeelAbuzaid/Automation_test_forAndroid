@@ -16,7 +16,7 @@ class TestLogin(unittest.TestCase):
         self.driver.implicitly_wait(30)
         # self.driver.setSetting("driver", "compose")
 
-    def login_screen(self):
+    def enter_Email(self):
         # verify that user can login with valid email
         self.element_loginByEmail = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR,
                                                              value='new UiSelector().resourceId("email_login_button")')
@@ -58,10 +58,10 @@ class TestLogin(unittest.TestCase):
         self.continueButton.click()
         sleep(3)
 
-    def test_enter_the_password(self):
+    def test_Login_BYEmail(self):
 
         # Call the test login screen as it's the first step
-        TestLogin.login_screen(self)
+        TestLogin.enter_Email(self)
 
         self.enter_pass = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR,
                                                    value='new UiSelector().resourceId("password_text_field")')
@@ -122,11 +122,13 @@ class TestLogin(unittest.TestCase):
             # The element does not exist on the screen.
             print("The element does not exist on the screen.")
 
+    def login_required(func):
+        def wrapper(self, *args, **kwargs):
+            if not self.is_logged_in():
+                TestLogin().test_Login_BYEmail()
+            return func(self, *args, **kwargs)
+
+        return wrapper
+
     if __name__ == '__main__':
         unittest.main()
-
-
-
-
-
-

@@ -7,17 +7,27 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from appium.webdriver.connectiontype import ConnectionType
 import HomeScreen.test_daily_content
+import Login_Signup.test_Login
 # import HomeScreen.test_daily_book
+from Config import config
+from selenium.common.exceptions import NoSuchElementException
 
 
-class TestDownloadBooks(HomeScreen.test_daily_content.TestDailybook):
+class TestDownloadBooks(unittest.TestCase):
+
+    def setUp(self):
+        self.driver = config.create_appium_driver()
+        self.driver.implicitly_wait(30)
 
     def test_download(self):
         # self.Listen_daily_book = self.driver.find_element(by=AppiumBy.XPATH,
         #                                            value="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/android.widget.FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.widget.ScrollView/android.view.View[1]")
         # self.Listen_daily_book.click()
 
-        HomeScreen.test_daily_book.TestDailybook.test_click_onListening(self)
+        try:
+            Login_Signup.test_Login.TestLogin.test_Login_BYEmail(self)
+        except NoSuchElementException:
+            pass
 
         sleep(10)
         self.Download = self.driver.find_element(by=AppiumBy.XPATH, value=
