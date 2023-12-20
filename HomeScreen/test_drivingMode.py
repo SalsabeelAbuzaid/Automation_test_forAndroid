@@ -29,7 +29,7 @@ class TestDRivingModee(unittest.TestCase):
         except NoSuchElementException:
             pass
 
-        HomeScreen.test_daily_content.TestDailybook.test_click_onListening(self)
+        HomeScreen.test_daily_content.TestDailyBook.test_click_onListening(self)
         sleep(5)
 
         self.driving_mode = self.driver.find_element(by=AppiumBy.XPATH,

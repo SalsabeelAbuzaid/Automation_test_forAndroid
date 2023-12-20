@@ -28,12 +28,12 @@ class TestAddToPlayList(unittest.TestCase):
         self.addToPlayList = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR,
                                                       value='new UiSelector().resourceId("FeaturedContentAddToPlaylistButton")')
         self.addToPlayList.click()
-        sleep(6)
+        sleep(10)
 
         try:
-            self.subscription_screen = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR,
-                                                                value='new UiSelector().resourceId("com.faylasof.android.waamda:id/coordinator")')
-            self.addToPlayList.click()
+            self.subscription_screen = self.driver.find_element(by=AppiumBy.XPATH,
+                                                                value="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View/android.widget.ScrollView/android.view.View[1]/android.widget.Button")
+            # self.subscription_screen = self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR,"وجيز بريميوم")
 
         except NoSuchElementException:
             self.fail("The expected screen is not displayed.")

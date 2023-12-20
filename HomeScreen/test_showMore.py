@@ -20,7 +20,7 @@ class TestNovels(unittest.TestCase):
             Login_Signup.test_Login.TestLogin.test_Login_BYEmail(self)
         except NoSuchElementException:
             pass
-        HomeScreen.test_daily_content.TestDailybook.test_click_onListening(self)
+        HomeScreen.test_daily_content.TestDailyBook.test_click_onListening(self)
         sleep(5)
         action = TouchAction(self.driver)
         action.press(x=500, y=2500).move_to(x=500, y=1000).release().perform()

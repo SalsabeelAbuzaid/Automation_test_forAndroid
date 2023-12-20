@@ -2,8 +2,8 @@ from appium import webdriver
 from appium.options.android import UiAutomator2Options
 
 desired_cap = {
-    # 'uiautomator2ServerInstallTimeout': 120000,
-    # 'adbExecTimeout': 120000,
+    'uiautomator2ServerInstallTimeout': 120000,
+    'adbExecTimeout': 120000,
     "appium:platformName": "Android",
     "appium:deviceName": "Pixel 6 Pro API 29",
     "appium:automationName": "UiAutomator2",
