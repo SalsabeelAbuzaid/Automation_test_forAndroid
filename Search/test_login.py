@@ -109,7 +109,7 @@ class TestLogin(unittest.TestCase):
 
         self.home_screen = self.driver.find_element(by=AppiumBy.XPATH,
                                                     value="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/android.widget.FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.widget.ScrollView")
-        self.assertTrue(self.home_screen.is_displayed(), "HomeScreen not displayed after login")
+        self.assertTrue(self.home_screen.is_displayed(), "Listening_Player not displayed after login")
         sleep(8)
 
 

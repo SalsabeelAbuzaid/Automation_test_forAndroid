@@ -30,7 +30,7 @@ class TestLogin(unittest.TestCase):
 
 
         # Validate the email format
-        self.email = "salsa+123@wajeez.test"
+        self.email = "ad@ad.ad"
         self.enter_email.send_keys(self.email)
         pat = re.compile(r"^\S+@\S+\.\S+$")
         self.result = re.match(pat, self.email)
@@ -68,7 +68,7 @@ class TestLogin(unittest.TestCase):
         self.enter_pass.click()
         self.enter_pass.clear()
         sleep(2)
-        self.password = "salsabeel"
+        self.password = "adadadad"
         self.enter_pass.send_keys(self.password)
         sleep(2)
 
@@ -122,13 +122,11 @@ class TestLogin(unittest.TestCase):
             # The element does not exist on the screen.
             print("The element does not exist on the screen.")
 
-    def login_required(func):
-        def wrapper(self, *args, **kwargs):
-            if not self.is_logged_in():
-                TestLogin().test_Login_BYEmail()
-            return func(self, *args, **kwargs)
-
-        return wrapper
+    def login_required(self):
+        try:
+            TestLogin.test_Login_BYEmail(self)
+        except NoSuchElementException:
+            pass
 
     if __name__ == '__main__':
         unittest.main()

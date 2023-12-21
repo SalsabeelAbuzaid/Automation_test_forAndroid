@@ -168,8 +168,6 @@ class TestSignUp(unittest.TestCase):
             # The element does not exist on the screen.
             print("The element does not exist on the screen.")
 
-    # def tearDown(self):
-    #     self.driver.quit()
 
 
 if __name__ == '__main__':

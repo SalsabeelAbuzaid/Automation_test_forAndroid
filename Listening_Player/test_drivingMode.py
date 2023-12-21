@@ -10,7 +10,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 
-import HomeScreen.test_daily_content
+from Listening_Player.test_Listening_reading import TestListeningReadingButton
 
 from selenium.common.exceptions import NoSuchElementException
 import Login_Signup.test_Login
@@ -21,15 +21,11 @@ class TestDRivingModee(unittest.TestCase):
 
     def setUp(self):
         self.driver = config.create_appium_driver()
-        self.driver.implicitly_wait(30)
+        self.driver.implicitly_wait(10)
+        Login_Signup.test_Login.TestLogin.login_required(self)
 
     def test_drivingMode(self):
-        try:
-            Login_Signup.test_Login.TestLogin.test_Login_BYEmail(self)
-        except NoSuchElementException:
-            pass
-
-        HomeScreen.test_daily_content.TestDailyBook.test_click_onListening(self)
+        TestListeningReadingButton.click_on_listening(self)
         sleep(5)
 
         self.driving_mode = self.driver.find_element(by=AppiumBy.XPATH,
@@ -122,9 +118,6 @@ class TestDRivingModee(unittest.TestCase):
                                                       "/android.view.View/android.widget.TextView[4]")
         assert self.player_screen, "it's not the the main player screen"
         sleep(5)
-
-    def tearDown(self):
-        self.driver.quit()
 
 
 if __name__ == '__main__':

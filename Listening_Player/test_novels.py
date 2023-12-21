@@ -20,6 +20,7 @@ class TestNovels(unittest.TestCase):
     def setUp(self):
         self.driver = config.create_appium_driver()
         self.driver.implicitly_wait(30)
+        Login_Signup.test_Login.TestLogin.login_required(self)
 
     def test_novelsss(self):
         try:
@@ -54,7 +55,7 @@ class TestNovels(unittest.TestCase):
         self.play_the_button.click()
         sleep(15)
 
-        # HomeScreen.test_drivingMode.TestDRivingModee.test_drivingMode(self)
+        # Listening_Player.test_drivingMode.TestDRivingModee.test_drivingMode(self)
         sleep(5)
         self.forwardTen = self.driver.find_element(by=AppiumBy.XPATH,
                                                    value=

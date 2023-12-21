@@ -1,6 +1,7 @@
 # import unittest
 # from Login_Signup import test_Login
 # from Login_Signup import test_sign_up
+from Listening_Player.test_addToPlayList import TestAddToPlayList
 #
 # loader = unittest.TestLoader()
 # suite = unittest.TestSuite()
@@ -12,7 +13,7 @@ import unittest
 from Login_Signup.test_Login import TestLogin
 
 # from Login_Signup.test_sign_up import TestSignUp
-# from HomeScreen.test_addToPlayList import TestAddToPlayList
+# from Listening_Player.test_addToPlayList import TestAddToPlayList
 
 # class Suite(unittest.TestCase):
 #     def suite_test(self):
@@ -23,7 +24,7 @@ loader = unittest.TestLoader()
 suite = unittest.TestSuite()
 
 # Add test cases (test classes) to the suite
-suite.addTest(loader.loadTestsFromTestCase(TestLogin))
+suite.addTest(loader.loadTestsFromTestCase(TestAddToPlayList))
 # suite.addTests(loader.loadTestsFromTestCase(TestSignUp))
 # suite.addTests(loader.loadTestsFromTestCase(TestDailybook))
 # suite.addTest(TestLogin('test_enter_the_password'))

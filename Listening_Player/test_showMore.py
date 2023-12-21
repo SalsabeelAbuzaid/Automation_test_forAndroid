@@ -13,14 +13,11 @@ import Login_Signup.test_Login
 class TestNovels(unittest.TestCase):
     def setUp(self):
         self.driver = config.create_appium_driver()
-        self.driver.implicitly_wait(30)
+        self.driver.implicitly_wait(10)
+        Login_Signup.test_Login.TestLogin.login_required(self)
 
     def test_Show_more(self):
-        try:
-            Login_Signup.test_Login.TestLogin.test_Login_BYEmail(self)
-        except NoSuchElementException:
-            pass
-        HomeScreen.test_daily_content.TestDailyBook.test_click_onListening(self)
+        HomeScreen.test_daily_content.TestListeningReadingButton.test_click_onListening(self)
         sleep(5)
         action = TouchAction(self.driver)
         action.press(x=500, y=2500).move_to(x=500, y=1000).release().perform()
@@ -58,8 +55,6 @@ class TestNovels(unittest.TestCase):
         sleep(10)
 
 
-    def tearDown(self):
-        self.driver.quit()
 
 
 #

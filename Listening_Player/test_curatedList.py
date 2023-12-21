@@ -2,7 +2,7 @@ import unittest
 from time import sleep
 from appium.webdriver.common.appiumby import AppiumBy
 from appium.webdriver.common.touch_action import TouchAction
-import HomeScreen.test_daily_content
+import Listening_Player.test_Listening_reading
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
@@ -15,13 +15,10 @@ from selenium.common.exceptions import NoSuchElementException
 class TestCuratedList(unittest.TestCase):
     def setUp(self):
         self.driver = config.create_appium_driver()
-        self.driver.implicitly_wait(30)
+        self.driver.implicitly_wait(10)
+        Login_Signup.test_Login.TestLogin.login_required(self)
 
     def test_curatedList(self):
-        try:
-            Login_Signup.test_Login.TestLogin.test_Login_BYEmail(self)
-        except NoSuchElementException:
-            pass
 
         sleep(5)
         action = TouchAction(self.driver)
