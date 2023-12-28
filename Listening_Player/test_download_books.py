@@ -6,7 +6,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from appium.webdriver.connectiontype import ConnectionType
-from Listening_Player.test_Listening_reading import TestListeningReadingButton
+from Listening_Player.test_Listening_Reading import TestListeningReadingButton
 import Login_Signup.test_Login
 # import Listening_Player.test_daily_book
 from Config import config
@@ -28,7 +28,7 @@ class TestDownloadBooks(unittest.TestCase):
         self.Download.click()
         sleep(5)
         self.isDownloading = self.driver.find_element(by=AppiumBy.XPATH,
-                                                      value="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.widget.ScrollView/android.view.View[4]/android.widget.ProgressBar")
+                                                      value="/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.widget.ScrollView/android.view.View[5]/android.widget.ProgressBar")
         assert self.isDownloading.is_displayed(), "The book wasn't downloaded."
         sleep(20)
 

@@ -2,7 +2,7 @@ import unittest
 from time import sleep
 from appium.webdriver.common.appiumby import AppiumBy
 from appium.webdriver.common.touch_action import TouchAction
-import Listening_Player.test_Listening_reading
+import Listening_Player.test_Listening_Reading
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By

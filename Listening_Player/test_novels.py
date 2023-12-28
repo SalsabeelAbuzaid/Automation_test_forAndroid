@@ -80,3 +80,9 @@ class TestNovels(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+
+    def test_run(self):
+        TestListeningReadingButton.click_on_listening(self)
+        TestListeningReadingButton.test_download(self)
+        TestListeningReadingButton.test_switch_reading()
